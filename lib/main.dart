@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stockpulse/providers/auth_provider.dart';
+import 'package:stockpulse/providers/inventory_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'core/router.dart';
+import 'core/theme.dart';
 
 void main() async{
   WidgetsFlutterBinding .ensureInitialized();
@@ -8,7 +13,8 @@ void main() async{
     url: 'https://your-supabase-url.supabase.co',
     anonKey: 'your-anon-key',
   );
-  runApp(const StockPulseApp();
+  runApp(const StockPulseApp(),
+  );
 }
 final supabase = Supabase.instance.client;
 
@@ -18,14 +24,14 @@ class StockPulseApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_)=>AuthProvider());
+      ChangeNotifierProvider(create: (_)=>AuthProvider()),
     ChangeNotifierProvider(create: (_)=>InventoryProvider()),
     ],
     child:MaterialApp.router(
       title: 'StockPulse',
       debugShowCheckedModeBanner: false,
       theme:AppTheme.light,
-      themeMode: AppTheme.light,
+      themeMode: ThemeMode.dark,
       darkTheme: AppTheme.dark,
       routerConfig: appRouter,
     )
