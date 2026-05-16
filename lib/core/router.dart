@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stockpulse/main.dart';
+import 'package:stockpulse/screens/dashboard/dashboard_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../activity/activity_screen.dart';
@@ -36,6 +37,7 @@ final appRouter=GoRouter(
         path: '/signup',
         builder: (context,state)=>const SignupScreen(),
       ),
+      GoRoute(path: '/dashboard',builder: (context,state)=>const DashboardScreen()),
       GoRoute(path: '/inventory',
       builder:(context,sate)=>const InventoryScreen(),
         routes: [

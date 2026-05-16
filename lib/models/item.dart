@@ -35,7 +35,7 @@ class Item{
       lowStockThreshold: json['low_stock_threshold'],
       location: json['location'],
       imageUrl: json['image_url'],
-      qrcode: json['qrcode'],
+      qrcode: json['qrcode']??'',
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
     );

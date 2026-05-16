@@ -36,9 +36,13 @@ class InventoryProvider extends ChangeNotifier {
           .from('items')
           .select()
           .order('created_at', ascending: false);
-      _items = data.map<Item>((json) => Item.fromJson(json)).toList();
+      print("the data received from supabase is: $data");
+      _items=data.map((element)=>Item.fromJson(element)).toList();
+      // _items = data.map<Item>((json) => Item.fromJson(json)).toList();
+      print(_items.toString());
       _error = null;
     } catch (e) {
+      print("something went wrong fetching items: $e");
       _error = e.toString();
     } finally {
       _isLoading = false;
@@ -50,7 +54,7 @@ class InventoryProvider extends ChangeNotifier {
   Future<void> fetchActivityLog() async {
     try {
       final data = await supabase
-          .from('activity_logs')
+          .from('activity_log')
           .select()
           .order('created_at', ascending: false)
           .limit(50);
@@ -113,7 +117,7 @@ class InventoryProvider extends ChangeNotifier {
         .onPostgresChanges(
           event: PostgresChangeEvent.insert,
           schema: 'public',
-          table: 'activity_logs',
+          table: 'activity_log',
           callback: (payload) {
             final newLog = ActivityLog.fromJson(payload.newRecord);
             _activityLog.insert(0, newLog);
@@ -142,7 +146,7 @@ Future<String?> addItem({
         'low_stock_threshold': lowStockThreshold,
         'location': location,
         'image_url': imageUrl,
-        'qrcode': qrcode,
+        'qr_code': qrcode,
         'created_by':currentUser.id,
       }).select().single();
 

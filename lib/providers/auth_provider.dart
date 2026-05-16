@@ -65,6 +65,7 @@ Future<String?> signUp({
           'full_name': fullName,
           'is_admin': isAdmin,
         }
+
       );
       return null;
     }on AuthException catch(e){

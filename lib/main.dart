@@ -10,8 +10,8 @@ import 'core/theme.dart';
 void main() async{
   WidgetsFlutterBinding .ensureInitialized();
   await Supabase.initialize(
-    url: 'https://your-supabase-url.supabase.co',
-    anonKey: 'your-anon-key',
+    url: 'https://mzeshmhwjpfzzjbpdwlf.supabase.co',
+    anonKey: 'sb_publishable_ftbhqIPs08IwRbvM4XWniA_O0X9vEkC',
   );
   runApp(const StockPulseApp(),
   );
