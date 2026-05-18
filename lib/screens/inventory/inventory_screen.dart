@@ -115,14 +115,14 @@ class _InventoryScreenState extends State<InventoryScreen> {
                 ),
                 const SizedBox(width: 8),
                 _FilterChip(
-                  label: 'Low Stock (${inventory.lowStockItems})',
+                  label: 'Low Stock (${inventory.lowStockItems.length})',
                   selected: _filter == StockFilter.lowStock,
                   color: AppTheme.warning,
                   onTap: () => setState(() => _filter = StockFilter.lowStock),
                 ),
                 const SizedBox(width: 8),
                 _FilterChip(
-                  label: 'Out (${inventory.items.where((i)=>i.isOutOfStock).length})',
+                  label: 'Out (${inventory.outOfStockItems.length})',
                   selected: _filter == StockFilter.outOfStock,
                   color: AppTheme.danger,
                   onTap: () => setState(() => _filter = StockFilter.outOfStock),
@@ -130,6 +130,39 @@ class _InventoryScreenState extends State<InventoryScreen> {
               ],
             ),
           ),
+
+          // Low Stock Alert Banner
+          if (inventory.lowStockItems.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: AppTheme.warning.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: AppTheme.warning.withOpacity(0.3)),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.warning_amber_rounded,
+                        size: 16, color: AppTheme.warning),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Low Stock: ${inventory.lowStockItems.map((i) => i.name).join(", ")}',
+                        style: const TextStyle(
+                          color: AppTheme.warning,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
 
           // Item count
           Padding(

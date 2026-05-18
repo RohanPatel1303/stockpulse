@@ -81,8 +81,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   _StatCard(
                     label: 'Low Stock',
-                    value: '${inventory.lowStockItems}',
-                    icon: Icons.warning_amber_rounded,
+                    value: '${inventory.lowStockItems.length}',                    icon: Icons.warning_amber_rounded,
                     color: AppTheme.warning,
                   ),
                   _StatCard(

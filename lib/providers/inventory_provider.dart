@@ -15,7 +15,9 @@ class InventoryProvider extends ChangeNotifier {
   RealtimeChannel? _activityChannel;
 
   List<Item> get items => _items;
-  List<Item> get lowStockItems => _items.where((i) => i.isLowStock).toList();
+  List<Item> get lowStockItems =>
+      _items.where((i) => i.isLowStock && !i.isOutOfStock).toList();
+  List<Item> get outOfStockItems => _items.where((i) => i.isOutOfStock).toList();
   List<ActivityLog> get activityLogs => _activityLog;
   bool get isLoading => _isLoading;
   String? get error => _error;
